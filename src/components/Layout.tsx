@@ -1,11 +1,27 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
-import { DashboardRoutingPrefix, AuthRoutingPrefix } from "../routing/constants";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { decrement, increment, selectCount } from "../app/store";
+import {
+  DashboardRoutingPrefix,
+  AuthRoutingPrefix,
+} from "../routing/constants";
 
 export function Layout() {
+  const count = useAppSelector(selectCount);
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <nav style={{ marginBottom: "3rem" }}>
+        {count}
+        <button onClick={() => dispatch(increment())} type="button">
+          Inc
+        </button>
+        <button onClick={() => dispatch(decrement())} type="button">
+          Dev
+        </button>
+
         <Link
           to={`/${DashboardRoutingPrefix}/page-1`}
           style={{ marginRight: "1rem" }}

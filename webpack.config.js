@@ -41,13 +41,15 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "mf_react_learn",
+      name: "shell",
       filename: "remoteEntry.js",
       remotes: {
         dashboard: "dashboard@http://localhost:8081/remoteEntry.js",
         auth: "auth@http://localhost:8082/remoteEntry.js",
       },
-      exposes: {},
+      exposes: {
+        "./ShellIndex": "./src/app/hooks",
+      },
       shared: {
         ...deps,
         react: {

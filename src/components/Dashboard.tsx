@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { mount } from "dashboard/DashboardIndex";
 import { DashboardRoutingPrefix } from "../routing/constants";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useStore } from "react-redux";
 
 const app1Basename = `/${DashboardRoutingPrefix}`;
 
 export default () => {
+  const store = useStore();
   const wrapperRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,6 +53,7 @@ export default () => {
     unmountRef.current = mount({
       mountPoint: wrapperRef.current!,
       initialPathname: location.pathname.replace(app1Basename, ""),
+      store,
     });
     isFirstRunRef.current = false;
   }, [location]);

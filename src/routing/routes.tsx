@@ -3,8 +3,16 @@ import { Navigate, RouteObject } from "react-router-dom";
 import { Layout } from "../components/Layout";
 import { DashboardRoutingPrefix, AuthRoutingPrefix } from "./constants";
 
-const Dashboard = lazy(() => import("../components/Dashboard"));
-const Auth = lazy(() => import("../components/Auth"));
+const Dashboard = lazy(() =>
+  import("../components/Dashboard").then((x) => {
+    return x;
+  })
+);
+const Auth = lazy(() =>
+  import("../components/Auth").then((x) => {
+    return x;
+  })
+);
 
 export const routes: RouteObject[] = [
   {
